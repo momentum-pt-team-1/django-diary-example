@@ -6,9 +6,18 @@
     <meta charset="UTF-8">
     <title>My Diary</title>
     <link rel="stylesheet" href="{% static 'css/diary.css' %}">
+	<script src="{% static 'js/main.js' %}" defer></script>
 </head>
 
 <body>
+	<button id="ajax-button">AJAX</button>
+	<div id="ajax-data"></div>
+	<div id="weather"></div>
+<form id="zip-form">
+	<label for="zip">Enter your zip code</label>
+	<input type="text" name="zip", id="zip" required>
+	<input type="submit" value="Get Weather">
+</form>
     <h1><a href="/">Dear diary …</a></h1>
 
     {% if messages %}

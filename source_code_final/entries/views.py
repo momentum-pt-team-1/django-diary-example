@@ -1,6 +1,8 @@
+import json
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView,
@@ -50,3 +52,21 @@ class EntryDeleteView(LockedView, SuccessMessageMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super().delete(request, *args, **kwargs)
+    
+    
+def view_returns_json(request):
+    entry_count = Entry.objects.count()
+    data = {
+        "entry_count": entry_count
+    }
+    return JsonResponse(data)
+
+def ajax_create_entry(request):
+    # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    data_from_post = request.POST['zip']
+    print(data_from_post)
+    data = {
+        'my_data': data_from_post,
+    }
+
+    return JsonResponse(data)
