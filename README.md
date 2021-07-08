@@ -12,9 +12,9 @@ Visit the article to follow along or download the content of `source_code_final`
 Type the following commands into a terminal to create and activate a virtual environment and install the requirements:
 
 ```sh
-$ python -m venv venv
-$ source venv/bin/activate
-$ python -m pip install -r requirements.txt
+$ pipenv install django
+$ pipenv shell
+
 ```
 
 Then run the database migrations and create a superuser:
