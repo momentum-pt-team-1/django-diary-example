@@ -62,11 +62,14 @@ def view_returns_json(request):
     return JsonResponse(data)
 
 def ajax_create_entry(request):
-    # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-    data_from_post = request.POST['zip']
-    print(data_from_post)
-    data = {
-        'my_data': data_from_post,
-    }
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        form_data = request.POST
+        title = form_data['title']
+        content = form_data['content']
+        author = form_data['author']
+        new_entry = Entry.objects.create(title=title, content=content, author=author)
+        data = {
+            'entry': title,
+        }
 
-    return JsonResponse(data)
+        return JsonResponse(data)
